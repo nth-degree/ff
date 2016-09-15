@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<%= csrf_meta_tags %>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+    <title>Norwest Data Science</title>
+    <link rel="stylesheet" href="../vendor/fontawesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="../vendor/animate.css/animate.css"/>
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="../styles/pe-icons/pe-icon-7-stroke.css"/>
+    <link rel="stylesheet" href="../styles/pe-icons/helper.css"/>
+    <link rel="stylesheet" href="../styles/stroke-icons/style.css"/>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+
+<!-- Wrapper-->
+<div class="wrapper">
+    <!-- Main content-->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row m-t-sm">
+                <div class="col-md-12">
+                    <div class="panel panel-filled">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="media">
+                                        <i class="pe pe-7s-server c-accent fa-3x"></i>
+                                        <h2 class="m-t-xs m-b-none">FF 2016</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <div class="col-md-12">
+                    <div class="panel panel-filled">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                           Players Available 
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                            <form method=POST>
+                            <input type=submit class="update-btn btn-default" value=Update>
+                                <table id="tableExample3" class="table table-striped table-hover">
+                                    <thead>
+                                    <form action="/request" method="POST">
+                                    <tr>
+                                        <th>Taken</th>
+                                        <th>Player</th>
+                                        <th>Injury</th>
+                                        <th>&nbsp;Rank</th>
+                                        <th>ESPN&nbsp;Rank</th>
+                                        <th>Pos</th>
+                                        <th>Team</th>
+                                        <th>Proj</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <% @ppl.each do |p| %>
+                                    <tr>
+                                        <td><div class="checkbox"><label> <input type="checkbox" name="dropped[]" value="<%= p.id%>"></td>
+                                        <td><font color="white"><%= p.name %></font></td>
+                                        <td><font color="white"><%= p.injury %></font></td>
+                                        <td><font color="white"><%= p.espn_rank %></font></td>
+                                        <td><font color="white"><%= p.player_rank %></font></td>
+                                        <td><font color="white"><%= p.pos %></font></td>
+                                        <td><font color="white"><%= p.team %></font></td>
+                                        <td><font color="white"><%= p.total_points %></font></td>
+                                    </tr>
+                                    <% end %>            
+                                    </form>
+                                    </tbody>
+                                </table>
+                               </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 1: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r1/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r1%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 2: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r2/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r2%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 3: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r3/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r3%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 4: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r4/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r4%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 5: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r5/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r5%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 6: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r6/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r6%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 7: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r7/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r7%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 8: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r8/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r8%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 9: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r9/p.max_pts-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r9%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 10: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r10/p.max_pts/p.r10-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r10%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 11: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r11/p.max_pts/p.r11-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r11%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 12: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r12/p.max_pts/p.r12-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r12%></td></tr><% end %></tbody></table></div></div></div></div>
+                <div class="col-md-12"><div class="panel panel-filled"><div class="panel-heading"><div class="panel-tools"><a class="panel-toggle"><i class="fa fa-chevron-up"></i></a></div>Round 13: Position Value </div><div class="panel-body"><div class="table-responsive"><table id="tableExample3" class="table table-striped table-hover"><thead><tr><th>Position</th><th>Discount</th><th>Max E[x]</th><th>Round E[x]</th></tr></thead><tbody><% @bestoptions.each do |p| %><td><%=p.pos%></td><td><%=((p.r13/p.max_pts/p.r13-1)*100.00).round(0)%>%</td><td><%=p.max_pts%></td><td><%=p.r13%></td></tr><% end %></tbody></table></div></div></div></div>
+            </div>
+        </div>
+    </section>
+    <!-- End main content-->
+</div>
+<!-- End wrapper-->
+
+<!-- Vendor scripts -->
+<script src="../vendor/pacejs/pace.min.js"></script>
+<script src="../vendor/jquery/dist/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../vendor/flot/jquery.flot.min.js"></script>
+<script src="../vendor/flot/jquery.flot.resize.min.js"></script>
+<script src="../vendor/flot/jquery.flot.spline.js"></script>
+<script src="../scripts/luna.js"></script>
+<script src="../vendor/datatables/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#tableExample3').DataTable({
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [ [5, 10, -1], [5, 10, "All"] ],
+            stateSave: true,
+            buttons: []
+        });
+        var chartUsersOptions2 = {
+            series: {
+                splines: {
+                    show: true,
+                    tension: 0.4,
+                    lineWidth: 2,
+                    fill: false
+                },
+            },
+            legend: {
+                show: false
+            },
+            grid: {
+                borderWidth: 0
+            }
+        };
+        $.plot($("#flotProfile"), data, chartUsersOptions2);
+    });
+</script>
+</body>
+</html>
